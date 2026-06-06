@@ -6,7 +6,7 @@ int low[maxn];//能追溯到的最早祖先
 int size[maxn];//以u为根的dfs字数大小 
 long long ans[maxn]; //删掉与u相连的所有边后，不连通的点对数量 
 int timer=0;//记录时间 
-int n,m;//数组大小
+int n,m;//数组大小和询问次数
 struct node{
 	int to;
 	int id;
