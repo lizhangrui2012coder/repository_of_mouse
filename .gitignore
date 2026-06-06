@@ -2,4 +2,6 @@
 *.out
 *.o
 .DS_Store
-.vscode/
+.vscode/*
+!.vscode/tasks.json
+!.vscode/c_cpp_properties.json

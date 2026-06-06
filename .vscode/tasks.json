@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build and Run with GCC",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "/opt/homebrew/bin/g++-15 \"${file}\" -std=c++17 -O2 -Wall -o \"${fileDirname}/main\" && \"${fileDirname}/main\""
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
