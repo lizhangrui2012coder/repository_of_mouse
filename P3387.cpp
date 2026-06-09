@@ -21,10 +21,14 @@ int timer;//时间戳
 int scc_cnt=0;//强连通分量的数量
 int belong[maxn];//表示u属于哪个强连通分量
 int sum[maxn];//表示第i个强连通分量的点权和 
+int dp[maxn];//维护当走到缩点i时,最多能拿多少点权和
+queue <int> q;//存储当前可以处理的缩点
+//拓扑排序的规则:
+//先处理入度为 0 的点。
+//处理完一个点后，删除它连出去的边。
+//如果某个点入度变成 0，就加入队列。
 vector<int> new_g[maxn];//缩点后的图
-int indeg[maxn];//缩点后的图入度 
-int dp[maxn];//最终答案 
-			 //dp[i]=走到强连通分量i时,最多能获得多少点权和
+int indeg[maxn];//缩点后的图入度
 void tarjan(int u){
 	dfn[u]=low[u]=++timer;//编号 
 	if_stack[++top]=u;//将u放进栈里
@@ -75,15 +79,48 @@ int main(){
 			tarjan(i);//调用 
 	}
 	//把原图里的u->v转化为"强连通分量之间的边" 
-	for(int u=1;u<=n;u++){
-		for(auto v:g[u]){
+	for(int u=1;u<=n;u++){//枚举边
+		for(auto v:g[u]){//枚举点
 			int x=belong[u];
 			int y=belong[v];
+			//如果x==y -> 那么会被缩称一个缩点，在内部就处理好了->不用管了
 			if(x!=y){//说明这条边连接了两个强连通分量 
-				new_g[x].push_back(y);
-				indeg[y]++;
+				new_g[x].push_back(y);//建立缩点后的边
+				//也就是所点后的新图里有一条边 x->y
+				indeg[y]++;//统计y的入度，为后面的拓扑(要知道从哪里入手)做准备
+
+				//这段代码把“原图点之间的边”，变成“强连通分量之间的边”
 			}
 		}
 	}
+	//接下来就是在这个DAG(有向无环图)上找一条路径，使经过点权值和最大
+	for(int i=1;i<=scc_cnt;i++){
+		dp[i]=sum[i];//可以拿到自己的点权
+		if(indeg[i]==0){//说明前方没有边,先从这个入手
+			q.push(i);//先进行处理
+		}
+	}
+	while(!q.empty()){
+		int u=q.front();//取出最上的点
+		q.pop();
+		for(auto v:new_g[u]){//枚举u能连到的边
+			dp[v]=max(dp[v],dp[u]+sum[v]);
+			//原来走到v的最好方案
+			//和
+			//先走到 u,再走到 v 的方案
+			//哪个更大？
+			indeg[v]--;
+			//拓扑排序中,处理完u后,就相当于把边:u->v删掉
+			//既然少了一条边指向v,那么:v 的入度减1
+			if(indeg[v]==0){//如果v的所有前驱都处理完了,那么v就可以被处理了
+				q.push(v);
+			}
+		}
+	}
+	int ans=0;//最终结果
+	for(int i=1;i<=scc_cnt;i++){
+		ans=max(ans,dp[i]);
+	}
+	cout<<ans;
 	return 0;
 } 
