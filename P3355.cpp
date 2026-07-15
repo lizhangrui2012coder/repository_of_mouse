@@ -7,7 +7,7 @@ int vis[maxn*maxn];//dfs访问的记录
 int id[maxn][maxn];//二维坐标映射编号
 vector <int> g[maxn*maxn];//左部点 u 能连到哪些右部点
 bool block[maxn][maxn];//记录是否障碍
-int dx[8]={-2,-1,1,2,2,1,-1,-2};
+int dx[8]={-2,-1,1,2,2,1,-1,-2};//像dfs
 int dy[8]={-1,-2,-2,-1,1,2,2,1};
 int timer;//时间戳
 bool find(int u){
