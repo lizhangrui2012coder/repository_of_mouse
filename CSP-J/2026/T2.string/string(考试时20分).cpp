@@ -13,7 +13,7 @@ int main(){
 	freopen("string.in","r",stdin);
 	freopen("string.out","w",stdout);
 	cin>>n;
-	long long sum=0;//±íÊ¾SµÄ³¤¶È 
+	long long sum=0;//ï¿½ï¿½Ê¾Sï¿½Ä³ï¿½ï¿½ï¿½ 
 	key[0].end=0;
 	for(int i=1;i<=n;i++){
 		cin>>a[i].num>>a[i].cha;
@@ -21,8 +21,8 @@ int main(){
 		key[i].end=key[i].start+a[i].num-1;
 		sum+=a[i].num;
 	}
-	long long i=1,j=sum;//×ø±ê
-	long long x=1,y=n;//Çø¼äºÅ 
+	long long i=1,j=sum;//ï¿½ï¿½ï¿½ï¿½
+	long long x=1,y=n;//ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	long long ans=0;
 	long long midl,midr;
 	if(sum%2==0){

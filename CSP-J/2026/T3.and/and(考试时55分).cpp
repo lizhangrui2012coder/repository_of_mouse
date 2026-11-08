@@ -2,7 +2,7 @@
 using namespace std;
 int n,m;
 long long a[200010];
-long long dp[200010];//mÎªjÊ±µÄ×î´ó°´Î»Óë
+long long dp[200010];//mÎªjÊ±ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 bool cmp(int x,int y){
 	return x>y;
 } 

@@ -6,8 +6,8 @@ int main(){
 	freopen("travel.in","r",stdin);
 	freopen("travel.out","w",stdout);
 	cin>>c1>>s1>>c2>>s2;
-	int pa1,pa2;//ÅÅÊý 
-	char zuo1,zuo2;//×ùÎ»ºÅ 
+	int pa1,pa2;//ï¿½ï¿½ï¿½ï¿½ 
+	char zuo1,zuo2;//ï¿½ï¿½Î»ï¿½ï¿½ 
 	zuo1=s1[2];
 	zuo2=s2[2];
 	pa1=(s1[0]-'0')*10+s1[1]-'0';
